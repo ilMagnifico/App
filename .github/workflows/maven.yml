@@ -27,7 +27,9 @@ jobs:
         key: ${{ runner.os }}-m2-jdk${{ matrix.java }}-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
     - name: Build with Maven
-      run: mvn -f app/pom.xml clean verify
+      run: >
+        mvn -f app/pom.xml 
+        clean verify ${{ matrix.additional-maven-args }}
     - name: Generate JUnit Report
       run: >
         mvn -f app/pom.xml 
