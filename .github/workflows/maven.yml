@@ -29,8 +29,10 @@ jobs:
         mvn -f app/pom.xml 
         clean verify
         surefire-report:report-only site:site -DgenerateReports=false
+      if: ${{ always() }}
     - name: Archive JUnit Report 
       uses: actions/upload-artifact@v2
+      if: ${{ always() }}
       with:
        name: surefire-report-jdk-${{ matrix.java }} 
        path: '**/target/site'
